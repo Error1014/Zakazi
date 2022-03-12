@@ -21,6 +21,8 @@ namespace Zakazi
     public partial class MainWindow : Window
     {
         public List<int> ListZakazov = new List<int>();
+        public List<int> ListDoneZakazov = new List<int>();
+        public List<Button> myZakaz = new List<Button>();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,12 +32,18 @@ namespace Zakazi
         {
             ListZakazov.Add(int.Parse(ReadNumZakaz1.Text));
             ShowZakaz();
+            AddEditElement();
             ReadNumZakaz1.Text = "";
         }
 
-        private void DeletZakaz(object sender, RoutedEventArgs e)
+        private void BtnDeletZakaz(object sender, RoutedEventArgs e)
         {
-            if (ListZakazov.Count>0)
+            DeletZakaz();
+        }
+        public void DeletZakaz()
+        {
+            DeletEditElement();
+            if (ListZakazov.Count > 0)
             {
                 ListZakazov.RemoveAt(ListZakazov.Count - 1);
                 ShowZakaz();
@@ -47,11 +55,32 @@ namespace Zakazi
         }
         public void ShowZakaz()
         {
-            textBockNoDone.Text = "";
+            textBlockNoDone.Text = "";
             for (int i = 0; i < ListZakazov.Count; i++)
             {
-                textBockNoDone.Text += ListZakazov[i].ToString()+" ";
+                textBlockNoDone.Text +=ListZakazov[i].ToString()+" ";
             }
+        }
+        public void AddEditElement()
+        {
+            myZakaz.Add(new Button());
+            myZakaz[myZakaz.Count - 1].Content = "Завершить №" + ReadNumZakaz1.Text;
+            myZakaz[myZakaz.Count - 1].Width = 200;
+            myZakaz[myZakaz.Count - 1].Height = 30;
+            myZakaz[myZakaz.Count - 1].Click += CompleteZakaz;
+            EditZakaz.Children.Add(myZakaz[myZakaz.Count - 1]);
+        }
+        public void DeletEditElement()
+        {
+            myZakaz.RemoveAt(myZakaz.Count - 1);
+            EditZakaz.Children.RemoveAt(myZakaz.Count);
+        }
+        public void CompleteZakaz(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Заказ Выполнен");
+            textBlockDone.Text += " ";
+            DeletZakaz();
+            
         }
 
     }

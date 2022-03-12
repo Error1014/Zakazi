@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Zakazi
 {
-    class LogicPrototype
+    public class LogicPrototype
     {
+
     }
 }
