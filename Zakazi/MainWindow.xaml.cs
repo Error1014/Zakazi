@@ -23,6 +23,7 @@ namespace Zakazi
         public List<int> ListZakazov = new List<int>();
         public List<int> ListDoneZakazov = new List<int>();
         public List<Button> myZakaz = new List<Button>();
+        public int selectZakaz;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,14 +39,15 @@ namespace Zakazi
 
         private void BtnDeletZakaz(object sender, RoutedEventArgs e)
         {
-            DeletZakaz();
+            DeletZakaz(ListZakazov.Count - 1);
         }
-        public void DeletZakaz()
+        public void DeletZakaz(int num)
         {
             DeletEditElement();
             if (ListZakazov.Count > 0)
             {
-                ListZakazov.RemoveAt(ListZakazov.Count - 1);
+                ListZakazov.RemoveAt(num);
+                
                 ShowZakaz();
             }
             else
@@ -64,7 +66,7 @@ namespace Zakazi
         public void AddEditElement()
         {
             myZakaz.Add(new Button());
-            myZakaz[myZakaz.Count - 1].Content = "Завершить №" + ReadNumZakaz1.Text;
+            myZakaz[myZakaz.Count - 1].Content = /*"Завершить №" + */ReadNumZakaz1.Text;
             myZakaz[myZakaz.Count - 1].Width = 200;
             myZakaz[myZakaz.Count - 1].Height = 30;
             myZakaz[myZakaz.Count - 1].Click += CompleteZakaz;
@@ -76,11 +78,15 @@ namespace Zakazi
             EditZakaz.Children.RemoveAt(myZakaz.Count);
         }
         public void CompleteZakaz(object sender, RoutedEventArgs e)
-        {
+        { 
             MessageBox.Show("Заказ Выполнен");
-            textBlockDone.Text += " ";
-            DeletZakaz();
             
+            var b = sender as Button;
+            string s = b.Content.ToString();
+            selectZakaz = int.Parse(s);
+            DeletZakaz(myZakaz.Count - 1);
+            textBlockDone.Text += selectZakaz + " ";
+
         }
 
     }
