@@ -52,7 +52,7 @@ namespace Zakazi
             {
                 textBockNoDone.Text += ListZakazov[i].ToString()+" ";
             }
-
         }
+
     }
 }
