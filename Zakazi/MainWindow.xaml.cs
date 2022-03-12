@@ -20,9 +20,39 @@ namespace Zakazi
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<int> ListZakazov = new List<int>();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void AddZakaz(object sender, RoutedEventArgs e)
+        {
+            ListZakazov.Add(int.Parse(ReadNumZakaz1.Text));
+            ShowZakaz();
+            ReadNumZakaz1.Text = "";
+        }
+
+        private void DeletZakaz(object sender, RoutedEventArgs e)
+        {
+            if (ListZakazov.Count>0)
+            {
+                ListZakazov.RemoveAt(ListZakazov.Count - 1);
+                ShowZakaz();
+            }
+            else
+            {
+                MessageBox.Show("У вас нет заказов");
+            }
+        }
+        public void ShowZakaz()
+        {
+            textBockNoDone.Text = "";
+            for (int i = 0; i < ListZakazov.Count; i++)
+            {
+                textBockNoDone.Text += ListZakazov[i].ToString()+" ";
+            }
+
         }
     }
 }

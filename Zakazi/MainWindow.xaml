@@ -15,15 +15,30 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="Beige">
-            
+        <StackPanel Grid.Column="0" Background="Beige" Orientation="Horizontal">
+            <Canvas>
+                <TextBlock Text="Табло 1" FontSize="28"/>
+                <TextBlock Text="Введите число:" FontSize="24" Canvas.Top="43"/>
+                <TextBox x:Name="ReadNumZakaz1" Text="" FontSize="24" Canvas.Left="171" Canvas.Top="43" Width="77"/>
+                <StackPanel x:Name="EditZakaz" Width="300" Height="100" Background="Wheat" Canvas.Left="31" Canvas.Top="100">
+                    
+                </StackPanel>
+                <Button Width="100" Height="35" Canvas.Left="31" Canvas.Top="251" Content="Создать" Click="AddZakaz"/>
+                <Button Width="100" Height="35" Canvas.Left="249" Canvas.Top="251" Content="Удалить" Click="DeletZakaz"/>
+            </Canvas>
         </StackPanel>
-        <Canvas Grid.Column="1" Background="Aqua" >
-            <StackPanel Background="Red" Grid.Column="1" Width="160" Height="250" Canvas.Left="10" Canvas.Top="10"/>
-            <StackPanel Background="Red" Grid.Column="1" Width="160" Height="250" Canvas.Left="202" Canvas.Top="10"/>
-        </Canvas>
+        <StackPanel Grid.Column="1" Background="Aqua" Orientation="Horizontal">
+            <StackPanel Background="Red" Grid.Column="1" Width="160" Height="250" Margin="20">
+                <TextBlock Text="Готовится"/>
+                <TextBlock x:Name="textBockNoDone" Text=""/>
+            </StackPanel>
+            <StackPanel Background="Green" Grid.Column="1" Width="160" Height="250" Margin="20">
+                <TextBlock Text="Готово"/>
+                <TextBlock x:Name="textBockDone" Text=""/>
+            </StackPanel>
+        </StackPanel>
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Height="103" Background="AntiqueWhite">
-            
+
         </StackPanel>
     </Grid>
 </Window>
